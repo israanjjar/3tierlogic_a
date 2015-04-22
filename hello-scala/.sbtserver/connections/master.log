@@ -1,0 +1,13 @@
+New log file opened at Wed Apr 22 11:43:31 PDT 2015 by 3713@israas-MacBook-Pro.local
+Taking next connection to: 59574
+New client attempting to connect on port: 59575-59574
+  Address = /192.168.0.11:59574
+This client on port 59575 has uuid 65b3ba84-6f02-47b5-b948-ad01faccba5c configName activator humanReadableName Activator protocolVersion 1 featureTags Vector()
+Connected Clients: activator-65b3ba84-6f02-47b5-b948-ad01faccba5c
+Taking next connection to: 59574
+Checking to see if clients are empty...
+No non-daemon clients connected after 3 min. Shutting down.
+Server socket thread exiting.
+0 clients open, will close them...
+All client sockets have been closed.
+Closing the 3713@israas-MacBook-Pro.local logs at Wed Apr 22 11:46:31 PDT 2015, goodbye.
