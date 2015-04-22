@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+@import play.mvc.Http.Context.Implicit._
+
+<html>
+<head>
+    <title>Reactive Stock News Dashboard</title>
+    <link rel='stylesheet' href='@routes.Assets.at("lib/bootstrap/css/bootstrap.min.css")'>
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+    <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+    <script type='text/javascript' src='@routes.Assets.at("lib/jquery/jquery.min.js")'></script>
+    <script type='text/javascript' src='@routes.Assets.at("lib/flot/jquery.flot.js")'></script>
+    <script type='text/javascript' src='@routes.Assets.at("javascripts/index.js")'></script>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+     <script type='text/javascript' src='@routes.Assets.at("react.min.js")'></script>
+</head>
+<body data-ws-url="@routes.Application.ws.webSocketURL(request)">
+    <div class="navbar navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="#"> <img src='http://3tierlogic.com/assets/images/logo-navbar.png'></a>
+                <form id="addsymbolform" class="navbar-form pull-right">
+                    <input id="addsymboltext" type="text" class="span2" placeholder="SYMBOL">
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h1>PONG!!</h1>
+        <div id="container">
+        </div>
+        
+        <h1 class="hello">HELLO WORLD!!!</h1>
+         <div class="chart-a">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+    </div>
+    <script>
+      var ExampleApplication = React.createClass({
+        render: function() {
+          var elapsed = Math.round(this.props.elapsed  / 100);
+          var seconds = elapsed / 10 + (elapsed % 10 ? '' : '.0' );
+          var message =
+            'React has been successfully running for ' + seconds + ' seconds.';
+
+          return React.DOM.p(null, message);
+        }
+      });
+
+        // Call React.createFactory instead of directly call ExampleApplication({...}) in React.render
+        var ExampleApplicationFactory = React.createFactory(ExampleApplication);
+
+        var start = new Date().getTime();
+            setInterval(function() {
+            React.render(
+              ExampleApplicationFactory({elapsed: new Date().getTime() - start}),
+              document.getElementById('container')
+            );
+        }, 50);
+        $(function() {
+            console.log( "ready!" );
+
+            $( ".hello" ).hide( "slow" );
+            // var div = document.createElement("div");
+            // div.innerHTML = "Hello, world!";
+            // document.body.appendChild(div);
+
+            var data1 = [4, 8, 15, 16, 23, 42];
+            var x = d3.scale.linear()
+            .domain([0, d3.max(data1)])
+            .range([0, 420]);
+            var chart = d3.select(".chart-a");
+            var bar = chart.selectAll("div");
+            var barUpdate = bar.data(data1);
+            var barEnter = barUpdate.enter().append("div");
+            barEnter.style("width", function(d) { return d * 10 + "px"; });
+            barEnter.text(function(d) { return d; });
+        });
+
+    </script>
+</body>
+</html>
